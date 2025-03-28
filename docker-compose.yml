@@ -1,0 +1,19 @@
+services:
+  server:
+    container_name: kutt-container       # 👈 Name of the running container
+    image: kutt-image                    # 👈 Name of the built image
+    build:
+      context: .
+    volumes:
+      - db_data_sqlite:/var/lib/kutt
+      - custom:/kutt/custom
+    env_file:
+      - .env
+    environment:
+      DB_FILENAME: "/var/lib/kutt/data.sqlite"
+    ports:
+      - 3000:3000
+
+volumes:
+  db_data_sqlite:
+  custom:
